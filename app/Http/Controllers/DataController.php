@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DataResource;
 use App\Models\Data;
 use Illuminate\Http\Request;
-use App\Http\Dto\Responses;
 
 class DataController extends Controller
 {
     public function index() {
-        $response = new Responses();
         try {
             $res = Data::all();
-            return $response->Response('OK', $res, 200);
+            $collection = DataResource::collection($res);
+            return $this->Response('OK', $collection, 200);
         } catch (\Throwable $th) {
-            return $response->Response($th->getMessage(), null, $th->getCode());
+            return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
 
     public function show(Request $request)
     {
-        $response = new Responses();
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -29,19 +28,19 @@ class DataController extends Controller
             ]);
 
             $res = Data::where('nik', $request->nik)->orWhere('nama_lengkap', $request->nama_lengkap)->get();
+            $collection = DataResource::collection($res);
 
             if ($res === null || $res === []) {
-                return $response->Response("Data tidak ditemukan.", $res, 404);
+                return $this->Response("Data tidak ditemukan.", $res, 404);
             } else {
-                return $response->Response("OK", $res, 200);
+                return $this->Response("OK", $collection, 200);
             }
         } catch (\Throwable $th) {
-            return $response->Response($th->getMessage(), null, $th->getCode());
+            return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
 
     public function store(Request $request) {
-        $response = new Responses();
         try {
             $res = $request->validate([
                 'nik' => 'required|numeric',
@@ -54,14 +53,13 @@ class DataController extends Controller
 
             Data::create($res);
 
-            return $response->Response("OK", $res, 200);
+            return $this->Response("OK", $res, 200);
         } catch (\Throwable $th) {
-            return $response->Response($th->getMessage(), null, $th->getCode());
+            return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
 
     public function update(Request $request) {
-        $response = new Responses();
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -83,14 +81,13 @@ class DataController extends Controller
                 'negara' => $request->negara,
             ]);
 
-            return $response->Response("OK", $res, 200);
+            return $this->Response("OK", $res, 200);
         } catch (\Throwable $th) {
-            return $response->Response($th->getMessage(), null, $th->getCode());
+            return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
 
     public function destroy(Request $request) {
-        $response = new Responses();
         try {
             $request->validate([
                 'nik' => 'required|numeric',
@@ -99,13 +96,13 @@ class DataController extends Controller
             $res = Data::where('nik', $request->nik);
 
             if ($res === null || $res === []) {
-                return $response->Response("Data tidak ditemukan.", $res, 404);
+                return $this->Response("Data tidak ditemukan.", $res, 404);
             } else {
                 $res->delete();
-                return $response->Response("OK", $res, 200);
+                return $this->Response("OK", $res, 200);
             }
         } catch (\Throwable $th) {
-            return $response->Response($th->getMessage(), null, $th->getCode());
+            return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
 }
