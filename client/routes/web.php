@@ -14,14 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // $res = Http::get('http://127.0.0.1:8000/api/all')['data'];
-
-    // if ($res->failed()) {
-    //     return response($res->json(), $res->status());
-    // } else {
-    //     return view('sections.index', compact('res'));
-    // }
-    return view('sections.index');
+    $res = Http::get('http://127.0.0.1:8080/api/v1/all')['data'];
+    return view('sections.index', compact('res'));
 });
 Route::get('/result', function () {
     return view('sections.result');

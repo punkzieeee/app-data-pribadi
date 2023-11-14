@@ -2,10 +2,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                Anda yakin menghapus data John Doe?
+                Anda yakin menghapus data {{$data['nama_lengkap']}}?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">OK</button>
+                <button type="submit" class="btn btn-primary" method="POST">OK</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
             </div>
         </div>

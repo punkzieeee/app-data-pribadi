@@ -12,33 +12,33 @@
                 <form action="#" method="POST">
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
-                            name="nik">
+                            name="nik" value={{ $data['nik'] }}>
                         <label for="nik">NIK</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap"
-                            name="nama">
+                        <input type="text" class="form-control" id="nama"
+                            placeholder="Masukkan nama lengkap" name="nama" value={{ $data['nama_lengkap'] }}>
                         <label for="nama">Nama Lengkap</label>
                     </div>
                     <div class="form-floating mb-1">
                         <p>Jenis Kelamin</p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="laki" name="optradio"
-                                value="Laki-laki" checked>Laki-laki
+                                value="Laki-laki" @if ($data['jenis_kelamin'] === 'Laki-laki') @checked(true) @endif>Laki-laki
                             <label class="form-check-label" for="laki"></label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="perempuan" name="optradio"
-                                value="Perempuan">Perempuan
+                                value="Perempuan" @if ($data['jenis_kelamin'] === 'Perempuan') @checked(true) @endif>Perempuan
                             <label class="form-check-label" for="perempuan"></label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
                         <p>Tanggal Lahir</p>
-                        <input type="date" id="tglLahir" name="tglLahir">
+                        <input type="date" id="tglLahir" name="tglLahir" value={{ $data['tgl_lahir'] }}>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" style="height: 100px">{{ $data['alamat'] }}</textarea>
                         <label for="alamat">Alamat</label>
                     </div>
                     <div class="form-floating mb-3">

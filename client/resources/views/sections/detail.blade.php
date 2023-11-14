@@ -12,41 +12,41 @@
                 <form action="#">
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
-                            name="nik" disabled>
+                            name="nik" value={{ $data['nik'] }} disabled>
                         <label for="nik">NIK</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap"
-                            name="nama" disabled>
+                        <input type="text" class="form-control" id="nama"
+                            placeholder="Masukkan nama lengkap" name="nama" value={{ $data['nama_lengkap'] }} disabled>
                         <label for="nama">Nama Lengkap</label>
                     </div>
                     <div class="form-floating mb-1">
                         <p>Jenis Kelamin</p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="laki" name="optradio"
-                                value="Laki-laki" disabled>Laki-laki
+                                value="Laki-laki" @if ($data['jenis_kelamin'] === 'Laki-laki') @checked(true) @endif
+                                disabled>Laki-laki
                             <label class="form-check-label" for="laki"></label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="perempuan" name="optradio"
-                                value="Perempuan" disabled>Perempuan
+                                value="Perempuan" @if ($data['jenis_kelamin'] === 'Perempuan') @checked(true) @endif
+                                disabled>Perempuan
                             <label class="form-check-label" for="perempuan"></label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
                         <p>Tanggal Lahir</p>
-                        <input type="date" id="tglLahir" name="tglLahir" disabled>
+                        <input type="date" id="tglLahir" name="tglLahir" value={{ $data['tgl_lahir'] }} disabled>
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" style="height: 100px" disabled></textarea>
+                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" style="height: 100px" disabled>{{ $data['alamat'] }}</textarea>
                         <label for="alamat">Alamat</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <select class="form-select" id="negara" aria-label="Pilih negara" disabled>
-                            <option disabled>Pilih negara</option>
-                            @include('sections.negara')
-                        </select>
+                    <div class="mb-3">
                         <label for="negara">Negara</label>
+                        <input type="text" class="form-control" id="negara" placeholder={{ $data['negara'] }}
+                            name="negara" disabled>
                     </div>
                 </form>
             </div>
