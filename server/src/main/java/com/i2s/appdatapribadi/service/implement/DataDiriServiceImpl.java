@@ -33,6 +33,7 @@ public class DataDiriServiceImpl implements DataDiriService {
                     .jenis_kelamin(temp.getJenisKelamin())
                     .alamat(temp.getAlamat())
                     .negara(temp.getNegara())
+                    .uuid(temp.getUuid())
                     .build();
             list.add(dto);
         }
@@ -55,6 +56,7 @@ public class DataDiriServiceImpl implements DataDiriService {
                     .jenis_kelamin(temp.getJenisKelamin())
                     .alamat(temp.getAlamat())
                     .negara(temp.getNegara())
+                    .uuid(temp.getUuid())
                     .build();
             list.add(dto);
         }

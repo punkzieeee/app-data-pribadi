@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('sections.index', compact('res'));
 });
 Route::get('/result', function () {
-    return view('sections.result');
+    $res = Http::get('http://127.0.0.1:8080/api/v1/search')['data'];
+    return view('sections.result', compact('res'));
 });

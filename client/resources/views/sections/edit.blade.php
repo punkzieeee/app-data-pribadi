@@ -9,7 +9,8 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <p>Edit Data Pribadi</p>
-                <form action="#" method="POST">
+                <form action={{ route('http://127.0.0.1:8080/api/v1/update', ['nik' => $request->input('nik'), 'nama_lengkap' => $request->input('nama'), 'jenis_kelamin' => $request->input('jk'), 'tgl_lahir' => $request->input('tglLahir'), 'alamat' => $request->input('alamat'), 'negara' => $request->input('negara'), 'uuid'=>$data['uuid']]) }}
+                    method="POST" enctype="multipart/form-data">
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
                             name="nik" value={{ $data['nik'] }}>
@@ -23,12 +24,12 @@
                     <div class="form-floating mb-1">
                         <p>Jenis Kelamin</p>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="laki" name="optradio"
+                            <input type="radio" class="form-check-input" id="jk" name="jk"
                                 value="Laki-laki" @if ($data['jenis_kelamin'] === 'Laki-laki') @checked(true) @endif>Laki-laki
                             <label class="form-check-label" for="laki"></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="perempuan" name="optradio"
+                            <input type="radio" class="form-check-input" id="jk" name="jk"
                                 value="Perempuan" @if ($data['jenis_kelamin'] === 'Perempuan') @checked(true) @endif>Perempuan
                             <label class="form-check-label" for="perempuan"></label>
                         </div>

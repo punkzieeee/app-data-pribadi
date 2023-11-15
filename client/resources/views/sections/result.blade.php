@@ -1,17 +1,26 @@
 @extends('home')
 
 @section('result')
-    <tr>
-        <td>1.</td> {{-- No. --}}
-        <td>1234567890</td> {{-- NIK --}}
-        <td>John Doe</td> {{-- Nama Lengkap --}}
-        <td>25</td> {{-- Umur --}}
-        <td>1 Januari 1998</td> {{-- Tanggal Lahir --}}
-        <td>Laki-laki</td> {{-- Jenis Kelamin --}}
-        <td>Jl. Beton No. 1 Jakarta Timur</td> {{-- Alamat --}}
-        <td>Indonesia</td> {{-- Negara --}}
-        <td> {{-- Action --}}
-            @include('sections.action')
-        </td>
-    </tr>
+    @php
+        $sum = 1;
+    @endphp
+    @foreach ($res as $data)
+        <tr>
+            <td>{{ $sum }}.</td> {{-- No. --}}
+            <td>{{ $data['nik'] }}</td> {{-- NIK --}}
+            <td>{{ $data['nama_lengkap'] }}</td> {{-- Nama Lengkap --}}
+            <td>{{ Carbon\Carbon::parse(now())->diffInYears(Carbon\Carbon::parse($data['tgl_lahir'])) }}</td>
+            {{-- Umur --}}
+            <td>{{ Carbon\Carbon::parse($data['tgl_lahir'])->translatedFormat('d F Y') }}</td> {{-- Tanggal Lahir --}}
+            <td>{{ $data['jenis_kelamin'] }}</td> {{-- Jenis Kelamin --}}
+            <td>{{ $data['alamat'] }}</td> {{-- Alamat --}}
+            <td>{{ $data['negara'] }}</td> {{-- Negara --}}
+            <td> {{-- Action --}}
+                @include('sections.action', $data)
+            </td>
+        </tr>
+        @php
+            $sum++;
+        @endphp
+    @endforeach
 @endsection

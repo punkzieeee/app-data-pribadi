@@ -17,4 +17,5 @@ public class DataDiriDto implements Serializable {
     private Date tgl_lahir;
     private String alamat;
     private String negara;
+    private String uuid;
 }
