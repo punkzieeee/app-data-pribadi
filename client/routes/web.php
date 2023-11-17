@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,4 @@ Route::get('/result', function () {
     $res = Http::get('http://127.0.0.1:8080/api/v1/search')['data'];
     return view('sections.result', compact('res'));
 });
+Route::resource('data', DataController::class);

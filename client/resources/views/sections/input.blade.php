@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <p>Tambah Data Baru</p>
                 <form
-                    action="#"{{-- redirect()->action('http://127.0.0.1:8080/api/v1/save', ['nik' => request()->input('nik'), 'nama_lengkap' => request()->input('nama'), 'jenis_kelamin' => request()->input('jk'), 'tgl_lahir' => request()->input('tglLahir'), 'alamat' => request()->input('alamat'), 'negara' => request()->input('negara')]) --}}
+                    action="#"{{-- route('data.store', ['nik' => request()->input('nik'), 'nama_lengkap' => request()->input('nama'), 'jenis_kelamin' => request()->input('jk'), 'tgl_lahir' => request()->input('tglLahir'), 'alamat' => request()->input('alamat'), 'negara' => request()->input('negara')]) --}}
                     method="POST" enctype="multipart/form-data">
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
