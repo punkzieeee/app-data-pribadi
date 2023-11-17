@@ -1,6 +1,9 @@
 package com.i2s.appdatapribadi.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,26 +68,31 @@ public class DataDiriController {
             return new ResponseEntity<ResponseDto>(res, HttpStatus.BAD_GATEWAY);
         }
     }
+
     @PostMapping("/save")
-    public ResponseEntity<ResponseDto> saveData(@RequestBody DataDiriDto dataDiriDto) {
+    public ResponseEntity<Void> saveData(@RequestBody DataDiriDto dataDiriDto) {
         try {
             DataDiri data = dataDiriService.saveData(dataDiriDto);
             if (data.equals(null)) {
                 ResponseDto resp = ResponseDto.builder()
-                    .code("502")
-                    .data(null)
-                    .message("Data Already Exist!")
-                    .build();
+                        .code("502")
+                        .data(null)
+                        .message("Data Already Exist!")
+                        .build();
 
-                return new ResponseEntity<ResponseDto>(resp, HttpStatus.BAD_GATEWAY);
+                // System.out.println(resp.toString());
+                return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
             }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("http://127.0.0.1:8000/"));
             ResponseDto res = ResponseDto.builder()
                     .code("200")
                     .data(data)
                     .message("OK")
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.OK);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         } catch (Exception e) {
             ResponseDto res = ResponseDto.builder()
                     .code("502")
@@ -92,29 +100,35 @@ public class DataDiriController {
                     .message(e.getMessage())
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.BAD_GATEWAY);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
         }
     }
+
     @PutMapping("/edit")
-    public ResponseEntity<ResponseDto> updateData(@RequestBody DataDiriDto dataDiriDto, @RequestParam String uuid) {
+    public ResponseEntity<Void> updateData(@RequestBody DataDiriDto dataDiriDto, @RequestParam String uuid) {
         try {
             DataDiri data = dataDiriService.updateData(dataDiriDto, uuid);
             if (data.equals(null)) {
                 ResponseDto resp = ResponseDto.builder()
-                    .code("502")
-                    .data(null)
-                    .message("Data Already Exist!")
-                    .build();
+                        .code("502")
+                        .data(null)
+                        .message("Data Already Exist!")
+                        .build();
 
-                return new ResponseEntity<ResponseDto>(resp, HttpStatus.BAD_GATEWAY);
+                // System.out.println(resp.toString());
+                return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
             }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("http://127.0.0.1:8000/"));
             ResponseDto res = ResponseDto.builder()
                     .code("200")
                     .data(data)
                     .message("OK")
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.OK);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         } catch (Exception e) {
             ResponseDto res = ResponseDto.builder()
                     .code("502")
@@ -122,20 +136,25 @@ public class DataDiriController {
                     .message(e.getMessage())
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.BAD_GATEWAY);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
         }
     }
+
     @DeleteMapping("/delete")
-    public ResponseEntity<ResponseDto> deleteData(@RequestBody DataDiriDto dataDiriDto) {
+    public ResponseEntity<Void> deleteData(@RequestBody DataDiriDto dataDiriDto) {
         try {
             dataDiriService.deleteData(dataDiriDto);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(URI.create("http://127.0.0.1:8000/"));
             ResponseDto res = ResponseDto.builder()
                     .code("200")
                     .data(null)
                     .message("OK")
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.OK);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(headers, HttpStatus.MOVED_PERMANENTLY);
         } catch (Exception e) {
             ResponseDto res = ResponseDto.builder()
                     .code("502")
@@ -143,7 +162,8 @@ public class DataDiriController {
                     .message(e.getMessage())
                     .build();
 
-            return new ResponseEntity<ResponseDto>(res, HttpStatus.BAD_GATEWAY);
+            // System.out.println(res.toString());
+            return new ResponseEntity<>(null, HttpStatus.BAD_GATEWAY);
         }
     }
 }

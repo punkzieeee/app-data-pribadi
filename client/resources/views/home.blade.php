@@ -23,8 +23,7 @@
         </div>
     </a>
     <div class="container pt-5 bg-warning border border-2 border-danger-subtle rounded-4" style="--bs-bg-opacity: .5;">
-        <form
-            action={{ route('http://127.0.0.1:8000/result', ['nik' => $request->input('nik'), 'nama_lengkap' => $request->input('nama')]) }}>
+        <form action= "#"{{-- redirect()->action('http://127.0.0.1:8000/result', ['nik' => $nik, 'nama_lengkap' => $nama]) --}}>
             <div class="form-floating mb-3 mt-3">
                 <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK" name="nik">
                 <label for="nik">NIK</label>
