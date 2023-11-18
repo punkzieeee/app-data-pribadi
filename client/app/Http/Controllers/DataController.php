@@ -6,15 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DataResource;
 use App\Models\Data;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Http;
 class DataController extends Controller
 {
     public function index() {
         try {
-            $res = Data::all();
-            $collection = DataResource::collection($res);
-            return $this->Response('OK', $collection, 200);
+            $response = Http::get('http://127.0.0.1:8080/api/v1/all')['data'];
+            return view('sections.index', compact('response'));
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }
@@ -24,23 +22,17 @@ class DataController extends Controller
     {
         try {
             $res = $request->validate([
-                'nik' => 'required|numeric',
+                'nik' => 'required',
                 'nama_lengkap'=>'required'
             ]);
 
-            // $res = Data::where('nik', $request->nik)->orWhere('nama_lengkap', $request->nama_lengkap)->get();
-            // $collection = DataResource::collection($res);
-
-            // if ($res === null || $res === []) {
-            //     return $this->Response("Data tidak ditemukan.", $res, 404);
-            // } else {
-            //     return $this->Response("OK", $collection, 200);
-            // }
-            return Redirect::to('http://127.0.0.1:8080/api/v1/search')->withInput($res);
+            $response = Http::withBody(json_encode($res), "application/json")->get('http://127.0.0.1:8080/api/v1/search')['data'];
+            return view('sections.result', compact('response'))->with(['success' => 'Pencarian data berhasil!']);
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }
     }
+
 
     public function store(Request $request) {
         try {
@@ -53,10 +45,12 @@ class DataController extends Controller
                 'negara' => 'required'
             ]);
 
-            // Data::create($res);
-
-            // return $this->Response("OK", $res, 200);
-            return Redirect::to('http://127.0.0.1:8080/api/v1/save')->route('data.store')->withInput($res);
+            $response = Http::withBody(json_encode($res), "application/json")->post('http://127.0.0.1:8080/api/v1/save');
+            if ($response->successful()) {
+                return redirect()->route('data.index')->with(['success' => 'Data berhasil disimpan!']);
+            } else {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }
@@ -73,19 +67,12 @@ class DataController extends Controller
                 'negara' => 'required'
             ]);
 
-            // $res = Data::where('nik', $request->nik);
-
-            // $res->update([
-            //     'nik' => $request->nik,
-            //     'nama_lengkap' => $request->nama_lengkap,
-            //     'jenis_kelamin' => $request->jenis_kelamin,
-            //     'tgl_lahir' => $request->tgl_lahir,
-            //     'alamat' => $request->alamat,
-            //     'negara' => $request->negara,
-            // ]);
-
-            // return $this->Response("OK", $res, 200);
-            return Redirect::to('http://127.0.0.1:8080/api/v1/edit')->route('data.update')->withInput($res);
+            $response = Http::withBody(json_encode($res), "application/json")->put('http://127.0.0.1:8080/api/v1/edit?uuid='.$request->uuid);
+            if ($response->successful()) {
+                return redirect()->route('data.index')->with(['success' => 'Data berhasil diubah!']);
+            } else {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }
@@ -94,18 +81,15 @@ class DataController extends Controller
     public function destroy(Request $request) {
         try {
             $res = $request->validate([
-                'nik' => 'required|numeric',
+                'nik' => 'required',
             ]);
 
-            // $res = Data::where('nik', $request->nik);
-
-            // if ($res === null || $res === []) {
-            //     return $this->Response("Data tidak ditemukan.", $res, 404);
-            // } else {
-            //     $res->delete();
-            //     return $this->Response("OK", $res, 200);
-            // }
-            return Redirect::to('http://127.0.0.1:8080/api/v1/delete')->route('data.destroy')->withInput($res);
+            $response = Http::withBody(json_encode($res), "application/json")->delete('http://127.0.0.1:8080/api/v1/delete');
+            if ($response->successful()) {
+                return redirect()->route('data.index')->with(['success' => 'Data berhasil dihapus!']);
+            } else {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }

@@ -1,11 +1,8 @@
 @extends('home')
 @section('index')
-    @php
-        $sum = 1
-    @endphp
-    @foreach ($res as $data)
+    @foreach ($response as $data)
         <tr>
-            <td>{{ $sum }}.</td> {{-- No. --}}
+            <td>{{ $loop->iteration }}.</td> {{-- No. --}}
             <td>{{ $data['nik'] }}</td> {{-- NIK --}}
             <td>{{ $data['nama_lengkap'] }}</td> {{-- Nama Lengkap --}}
             <td>{{ Carbon\Carbon::parse(now())->diffInYears(Carbon\Carbon::parse($data['tgl_lahir'])) }}</td>
@@ -15,11 +12,8 @@
             <td>{{ $data['alamat'] }}</td> {{-- Alamat --}}
             <td>{{ $data['negara'] }}</td> {{-- Negara --}}
             <td> {{-- Action --}}
-                @include('sections.action', $data)
+                @include('sections.action')
             </td>
         </tr>
-        @php
-            $sum++
-        @endphp
     @endforeach
 @endsection

@@ -10,41 +10,42 @@
             <div class="modal-body">
                 <p>Tambah Data Baru</p>
                 <form
-                    action="#"{{-- route('data.store', ['nik' => request()->input('nik'), 'nama_lengkap' => request()->input('nama'), 'jenis_kelamin' => request()->input('jk'), 'tgl_lahir' => request()->input('tglLahir'), 'alamat' => request()->input('alamat'), 'negara' => request()->input('negara')]) --}}
-                    method="POST" enctype="multipart/form-data">
+                    action={{ route('data.store', ['nik' => request()->input('nik'), 'nama_lengkap' => request()->input('nama_lengkap'), 'jenis_kelamin' => request()->input('jenis_kelamin'), 'tgl_lahir' => request()->input('tgl_lahir'), 'alamat' => request()->input('alamat'), 'negara' => request()->input('negara')]) }}
+                    method="POST">
+                    @csrf
                     <div class="form-floating mb-3 mt-3">
                         <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
                             name="nik">
                         <label for="nik">NIK</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap"
-                            name="nama">
-                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="nama_lengkap" placeholder="Masukkan nama lengkap"
+                            name="nama_lengkap">
+                        <label for="nama_lengkap">Nama Lengkap</label>
                     </div>
                     <div class="form-floating mb-1">
                         <p>Jenis Kelamin</p>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="jk" name="jk"
+                            <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin"
                                 value="Laki-laki" checked>Laki-laki
                             <label class="form-check-label" for="laki"></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="jk" name="jk"
+                            <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin"
                                 value="Perempuan">Perempuan
                             <label class="form-check-label" for="perempuan"></label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
                         <p>Tanggal Lahir</p>
-                        <input type="date" id="tglLahir" name="tglLahir">
+                        <input type="date" id="tgl_lahir" name="tgl_lahir">
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" style="height: 100px"></textarea>
                         <label for="alamat">Alamat</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <select class="form-select" id="negara" aria-label="Pilih negara">
+                        <select class="form-select" id="negara" name="negara" aria-label="Pilih negara">
                             <option disabled>Pilih negara</option>
                             @include('sections.negara')
                         </select>

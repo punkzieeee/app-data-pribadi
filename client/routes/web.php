@@ -14,12 +14,8 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::get('/', function () {
-    $res = Http::get('http://127.0.0.1:8080/api/v1/all')['data'];
-    return view('sections.index', compact('res'));
-});
-Route::get('/result', function () {
-    $res = Http::get('http://127.0.0.1:8080/api/v1/search')['data'];
-    return view('sections.result', compact('res'));
-});
-Route::resource('data', DataController::class);
+Route::get('/', [DataController::class, 'index'])->name('data.index');
+Route::get('show', [DataController::class, 'show'])->name('data.show');
+Route::post('store', [DataController::class,'store'])->name('data.store');
+Route::post('update', [DataController::class,'update'])->name('data.update');
+Route::post('destroy', [DataController::class,'destroy'])->name('data.destroy');
