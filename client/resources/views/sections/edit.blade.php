@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-floating mb-1">
                         <input type="text" class="form-control" id="nama_lengkap" minlength="1"
-                            placeholder="Masukkan nama lengkap" name="nama_lengkap" value={{ $data['nama_lengkap'] }}>
+                            placeholder="Masukkan nama lengkap" name="nama_lengkap" value="{{ $data['nama_lengkap'] }}">
                         <label for="nama_lengkap">Nama Lengkap</label>
                     </div>
                     <div class="form-floating mb-1">

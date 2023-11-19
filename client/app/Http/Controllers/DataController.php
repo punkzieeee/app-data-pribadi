@@ -7,6 +7,7 @@ use App\Http\Resources\DataResource;
 use App\Models\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Validator;
 class DataController extends Controller
 {
     public function index() {
@@ -21,13 +22,17 @@ class DataController extends Controller
     public function show(Request $request)
     {
         try {
-            $res = $request->validate([
-                'nik' => 'required',
+            $validator = Validator::make($request->all(), [
+                'nik' => 'required|numeric',
                 'nama_lengkap'=>'required'
             ]);
 
-            $response = Http::withBody(json_encode($res), "application/json")->get('http://127.0.0.1:8080/api/v1/search')['data'];
-            return view('sections.result', compact('response'))->with(['success' => 'Pencarian data berhasil!']);
+            if ($validator->fails()) {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
+
+            $response = Http::withBody(json_encode($validator->validated()), "application/json")->get('http://127.0.0.1:8080/api/v1/search')['data'];
+            return view('sections.result', compact('response'));
         } catch (\Throwable $th) {
             return $this->Response($th->getMessage(), null, $th->getCode());
         }
@@ -36,8 +41,8 @@ class DataController extends Controller
 
     public function store(Request $request) {
         try {
-            $res = $request->validate([
-                'nik' => 'required|numeric',
+            $validator = Validator::make($request->all(), [
+                'nik' => 'required|numeric|unique:data_diri',
                 'nama_lengkap'=>'required',
                 'jenis_kelamin' => 'required',
                 'tgl_lahir' => 'required',
@@ -45,10 +50,14 @@ class DataController extends Controller
                 'negara' => 'required'
             ]);
 
-            $response = Http::withBody(json_encode($res), "application/json")->post('http://127.0.0.1:8080/api/v1/save');
+            if ($validator->fails()) {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
+
+            $response = Http::withBody(json_encode($validator->validated()), "application/json")->post('http://127.0.0.1:8080/api/v1/save');
             if ($response->successful()) {
                 return redirect()->route('data.index')->with(['success' => 'Data berhasil disimpan!']);
-            } else {
+            } else if ($response->failed()) {
                 return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
             }
         } catch (\Throwable $th) {
@@ -58,7 +67,7 @@ class DataController extends Controller
 
     public function update(Request $request) {
         try {
-            $res = $request->validate([
+            $validator = Validator::make($request->all(), [
                 'nik' => 'required|numeric',
                 'nama_lengkap'=>'required',
                 'jenis_kelamin' => 'required',
@@ -67,10 +76,14 @@ class DataController extends Controller
                 'negara' => 'required'
             ]);
 
-            $response = Http::withBody(json_encode($res), "application/json")->put('http://127.0.0.1:8080/api/v1/edit?uuid='.$request->uuid);
+            if ($validator->fails()) {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
+
+            $response = Http::withBody(json_encode($validator->validated()), "application/json")->put('http://127.0.0.1:8080/api/v1/edit?uuid='.$request->uuid);
             if ($response->successful()) {
                 return redirect()->route('data.index')->with(['success' => 'Data berhasil diubah!']);
-            } else {
+            } else if ($response->failed()) {
                 return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
             }
         } catch (\Throwable $th) {
@@ -80,14 +93,18 @@ class DataController extends Controller
 
     public function destroy(Request $request) {
         try {
-            $res = $request->validate([
+            $validator = Validator::make($request->all(), [
                 'nik' => 'required',
             ]);
 
-            $response = Http::withBody(json_encode($res), "application/json")->delete('http://127.0.0.1:8080/api/v1/delete');
+            if ($validator->fails()) {
+                return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
+            }
+
+            $response = Http::withBody(json_encode($validator->validated()), "application/json")->delete('http://127.0.0.1:8080/api/v1/delete');
             if ($response->successful()) {
                 return redirect()->route('data.index')->with(['success' => 'Data berhasil dihapus!']);
-            } else {
+            } else if ($response->failed()) {
                 return redirect()->route('data.index')->with(['error' => 'Terjadi kesalahan!']);
             }
         } catch (\Throwable $th) {

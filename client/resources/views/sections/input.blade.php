@@ -1,6 +1,6 @@
 <div class="modal fade" id="inputModal">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background-color: #f2f2f2;">
+        <div class="modal-content" style="background-color: #ffffe6;">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h5><i class="bi bi-person-vcard"></i> Aplikasi Data Pribadi</h5>
