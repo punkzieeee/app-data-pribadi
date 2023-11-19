@@ -28,11 +28,11 @@
             method="GET">
             @csrf
             <div class="form-floating mb-3 mt-3">
-                <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK" name="nik">
+                <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK" minlength="16" name="nik">
                 <label for="nik">NIK</label>
             </div>
             <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="nama_lengkap" placeholder="Masukkan nama"
+                <input type="text" class="form-control" id="nama_lengkap" placeholder="Masukkan nama" minlength="1"
                     name="nama_lengkap">
                 <label for="nama_lengkap">Nama</label>
             </div>

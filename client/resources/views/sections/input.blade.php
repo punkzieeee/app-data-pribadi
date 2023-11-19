@@ -14,12 +14,12 @@
                     method="POST">
                     @csrf
                     <div class="form-floating mb-3 mt-3">
-                        <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK"
+                        <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK" minlength="16"
                             name="nik">
                         <label for="nik">NIK</label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input type="text" class="form-control" id="nama_lengkap" placeholder="Masukkan nama lengkap"
+                        <input type="text" class="form-control" id="nama_lengkap" placeholder="Masukkan nama lengkap" minlength="1"
                             name="nama_lengkap">
                         <label for="nama_lengkap">Nama Lengkap</label>
                     </div>
@@ -27,13 +27,11 @@
                         <p>Jenis Kelamin</p>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin"
-                                value="Laki-laki" checked>Laki-laki
-                            <label class="form-check-label" for="laki"></label>
+                                value="Laki-laki">Laki-laki
                         </div>
                         <div class="form-check form-check-inline">
                             <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin"
                                 value="Perempuan">Perempuan
-                            <label class="form-check-label" for="perempuan"></label>
                         </div>
                     </div>
                     <div class="form-floating mb-3">
@@ -41,7 +39,7 @@
                         <input type="date" id="tgl_lahir" name="tgl_lahir">
                     </div>
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Masukkan alamat lengkap" id="alamat" name="alamat" minlength="1" style="height: 100px"></textarea>
                         <label for="alamat">Alamat</label>
                     </div>
                     <div class="form-floating mb-3">

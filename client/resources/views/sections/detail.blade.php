@@ -1,6 +1,6 @@
 <div class="modal fade" id="detail-modal-{{$data['uuid']}}">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background-color: #f2f2f2;">
+        <div class="modal-content" style="background-color: #ffffe6;">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h5><i class="bi bi-person-vcard"></i> Aplikasi Data Pribadi</h5>
@@ -24,12 +24,10 @@
                     <div class="form-check form-check-inline">
                         <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin" value="Laki-laki"
                             @if ($data['jenis_kelamin'] === 'Laki-laki') @checked(true) @endif disabled>Laki-laki
-                        <label class="form-check-label" for="laki"></label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input type="radio" class="form-check-input" id="jenis_kelamin" name="jenis_kelamin" value="Perempuan"
                             @if ($data['jenis_kelamin'] === 'Perempuan') @checked(true) @endif disabled>Perempuan
-                        <label class="form-check-label" for="perempuan"></label>
                     </div>
                 </div>
                 <div class="form-floating mb-3">
