@@ -1,4 +1,4 @@
-package com.i2s.appdatapribadi.service.implement;
+package com.punkzieeee.appdatapribadi.service.implement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +8,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.i2s.appdatapribadi.dto.CariDataDiriDto;
-import com.i2s.appdatapribadi.dto.DataDiriDto;
-import com.i2s.appdatapribadi.entity.DataDiri;
-import com.i2s.appdatapribadi.repository.DataDiriRepository;
-import com.i2s.appdatapribadi.service.interfaces.DataDiriService;
+import com.punkzieeee.appdatapribadi.dto.CariDataDiriDto;
+import com.punkzieeee.appdatapribadi.dto.DataDiriDto;
+import com.punkzieeee.appdatapribadi.entity.DataDiri;
+import com.punkzieeee.appdatapribadi.repository.DataDiriRepository;
+import com.punkzieeee.appdatapribadi.service.interfaces.DataDiriService;
 
 @Service
 public class DataDiriServiceImpl implements DataDiriService {

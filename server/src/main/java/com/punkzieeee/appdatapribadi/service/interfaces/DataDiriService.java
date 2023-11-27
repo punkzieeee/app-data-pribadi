@@ -1,10 +1,10 @@
-package com.i2s.appdatapribadi.service.interfaces;
+package com.punkzieeee.appdatapribadi.service.interfaces;
 
 import java.util.List;
 
-import com.i2s.appdatapribadi.dto.CariDataDiriDto;
-import com.i2s.appdatapribadi.dto.DataDiriDto;
-import com.i2s.appdatapribadi.entity.DataDiri;
+import com.punkzieeee.appdatapribadi.dto.CariDataDiriDto;
+import com.punkzieeee.appdatapribadi.dto.DataDiriDto;
+import com.punkzieeee.appdatapribadi.entity.DataDiri;
 
 public interface DataDiriService {
     public List<DataDiriDto> getAll();

@@ -1,4 +1,4 @@
-package com.i2s.appdatapribadi.dto;
+package com.punkzieeee.appdatapribadi.dto;
 
 import java.io.Serializable;
 import java.util.Date;

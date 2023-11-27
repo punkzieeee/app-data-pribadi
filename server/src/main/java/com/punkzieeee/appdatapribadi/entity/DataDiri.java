@@ -1,4 +1,4 @@
-package com.i2s.appdatapribadi.entity;
+package com.punkzieeee.appdatapribadi.entity;
 
 import java.util.Date;
 

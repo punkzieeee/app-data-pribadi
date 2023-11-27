@@ -1,11 +1,11 @@
-package com.i2s.appdatapribadi.repository;
+package com.punkzieeee.appdatapribadi.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.i2s.appdatapribadi.entity.DataDiri;
+import com.punkzieeee.appdatapribadi.entity.DataDiri;
 
 @Repository
 public interface DataDiriRepository extends JpaRepository<DataDiri, String>{
